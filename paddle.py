@@ -6,6 +6,8 @@ RIGHT = (350,0)
 class Paddle(Turtle):
     
     def __init__(self, position):
+        '''
+        '''
         super().__init__()
         self.position = position
         self.shape("square")
