@@ -2,6 +2,7 @@ from turtle import Turtle, Screen
 from paddle import Paddle
 from ball import Ball
 from scoreboard import Scoreboard
+from time import sleep
 
 screen = Screen()
 screen.setup(width=800, height=600)
@@ -43,7 +44,10 @@ ball = Ball()
 
 game_on=True
 while game_on:
+    sleep(0.01)
     screen.update()
+    ball.move()
+    ball.bounce()
 
 
 
