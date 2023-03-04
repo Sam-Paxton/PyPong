@@ -6,6 +6,8 @@ RIGHT = (350,0)
 class Paddle(Turtle):
     
     def __init__(self, position):
+        '''
+        '''
         super().__init__()
         self.position = position
         self.shape("square")
@@ -17,14 +19,18 @@ class Paddle(Turtle):
         if position == "right":
             self.goto(RIGHT)
         self.shapesize(stretch_wid=5, stretch_len=0.3)
+
     
     def up(self):
-        print(f"{self.position} paddle UP")
-        self.goto(self.xcor(), self.ycor()+30)
+        self.goto(self.xcor(), self.ycor()+50)
         
     def down(self):
-        print(f"{self.position} paddle DOWN")
-        self.goto(self.xcor(), self.ycor()-30)
+        self.goto(self.xcor(), self.ycor()-50)
+    
+    def get_front_area(self):
+        btm_coord = (self.pos()[0], self.pos()[1]-50) 
+        top_coord = (self.pos()[0], self.pos()[1]+50) 
+        return top_coord, btm_coord
         
         
         
