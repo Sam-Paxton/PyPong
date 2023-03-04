@@ -1,3 +1,4 @@
+import random
 from turtle import Turtle, Screen
 from paddle import Paddle
 from ball import Ball
@@ -16,7 +17,7 @@ net.ht()
 net.pensize(5)
 net.penup()
 net.pencolor("white")
-net.goto(0,300)
+net.goto(0, 260)
 net.seth(270)
 dashes = 20
 for _ in range(dashes):
@@ -33,27 +34,44 @@ r_paddle = Paddle(position="right")
 screen.listen()
 screen.onkeypress(key="w", fun=l_paddle.up)
 screen.onkeypress(key="s", fun=l_paddle.down)
+screen.onkeypress(key="W", fun=l_paddle.up)
+screen.onkeypress(key="S", fun=l_paddle.down)
 screen.onkeypress(key="Up", fun=r_paddle.up)
 screen.onkeypress(key="Down", fun=r_paddle.down)
 
 scoreboard = Scoreboard()
-
 ball = Ball()
 
-
-
-game_on=True
+speed = 1.5
+game_on = True
 while game_on:
     sleep(0.01)
     screen.update()
-    ball.move()
-    ball.bounce()
-
-
-
-
-
-
+    ball.move(speed)
+    ball.wall_collision()
+    
+    if ball.distance(l_paddle) < 50 and ball.xcor() < -334 or ball.distance(r_paddle) < 50 and ball.xcor() > 334:
+        ball.paddle_collision()
+    
+    if ball.xcor() > 344:
+        scoreboard.inc_score("left")
+        ball.goto(-320,0)
+        options = [random.randint(0, 40), random.randint(320, 360)]
+        choice = random.randint(0,1)
+        #new_head = random.randint(40, 320)
+        ball.seth(options[choice])
+        if speed < 5:
+            speed += 0.5
+    if ball.xcor() < -344:
+        scoreboard.inc_score("right")
+        ball.goto(320,0)
+        new_head = random.randint(140, 220)
+        ball.seth(new_head)
+        if speed < 5:            
+            speed += 0.5
+            
+    if scoreboard.l_score >= 10 or scoreboard.r_score > 10:
+        scoreboard.game_over()
 
 
 screen.exitonclick()
