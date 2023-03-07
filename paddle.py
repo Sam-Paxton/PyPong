@@ -6,7 +6,8 @@ RIGHT = (350,0)
 class Paddle(Turtle):
     
     def __init__(self, position):
-        '''
+        '''Param: str either 'left' or 'right' to place
+            the paddle on the screen
         '''
         super().__init__()
         self.position = position
@@ -22,15 +23,19 @@ class Paddle(Turtle):
 
     
     def up(self):
+        '''No params.
+            Move paddle up 50 pixels.
+            No Return.
+        '''
         self.goto(self.xcor(), self.ycor()+50)
         
     def down(self):
+        '''No params.
+            Move paddle up 50 pixels.
+            No Return.
+        '''
         self.goto(self.xcor(), self.ycor()-50)
     
-    def get_front_area(self):
-        btm_coord = (self.pos()[0], self.pos()[1]-50) 
-        top_coord = (self.pos()[0], self.pos()[1]+50) 
-        return top_coord, btm_coord
         
         
         

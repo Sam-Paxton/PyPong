@@ -45,20 +45,23 @@ ball = Ball()
 speed = 1.5
 game_on = True
 while game_on:
+    #Sleeps to limit game speed, updates screen
     sleep(0.01)
     screen.update()
+    # moves ball by amount specified by speed, checks if ball has collided with wall
     ball.move(speed)
     ball.wall_collision()
     
+    #checks if ball has collided with paddle. if true: calls paddle collision
     if ball.distance(l_paddle) < 50 and ball.xcor() < -334 or ball.distance(r_paddle) < 50 and ball.xcor() > 334:
         ball.paddle_collision()
     
+    #Handles if player misses the ball, other player gets point, serves ball
     if ball.xcor() > 344:
         scoreboard.inc_score("left")
         ball.goto(-320,0)
         options = [random.randint(0, 40), random.randint(320, 360)]
         choice = random.randint(0,1)
-        #new_head = random.randint(40, 320)
         ball.seth(options[choice])
         if speed < 5:
             speed += 0.5
@@ -69,7 +72,8 @@ while game_on:
         ball.seth(new_head)
         if speed < 5:            
             speed += 0.5
-            
+       
+    #if one player reaches 10 points, ends game
     if scoreboard.l_score >= 10 or scoreboard.r_score > 10:
         scoreboard.game_over()
 
