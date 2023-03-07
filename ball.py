@@ -20,14 +20,23 @@ class Ball(Turtle):
     
     
     def move(self, speed):
+        '''Params: speed : int 
+        Moves ball forward by this number of pixels.
+        No return'''
         self.fd(speed)
         
     def wall_collision(self):
+        '''No Params.
+        Checks if ball has collided with wall. if true: reflects heading of ball perpendicular to the wall.
+        No return.'''
         if self.ycor() <= BOTTOM or self.ycor() >= TOP:
             new_h = 360 - self.heading()
             self.seth(new_h)
             
     def paddle_collision(self):
+        '''No Params.
+        Checks if ball has collided with paddle. if true: reflects heading of ball perpendicular to the wall.
+        No return.'''
         new_h = (180 - self.heading()) 
         self.seth(new_h)
         
